@@ -13,7 +13,7 @@ class ConfirmModal extends Modal {
 		title: string,
 		text: string,
 		confirmButtonText: string,
-		cancelButtonText: string = "Cancel"
+		cancelButtonText = "Cancel"
 	) {
 		super(app);
 
