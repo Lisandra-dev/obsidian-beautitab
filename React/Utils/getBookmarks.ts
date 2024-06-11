@@ -102,7 +102,7 @@ const flattenBookmarkGroups = (items: any[], parentPath = null) => {
  */
 export const getBookmarkGroups = (app: App) => {
 	// @ts-ignore
-	let bookmarks = app?.internalPlugins.plugins.bookmarks.instance.items;
+	const bookmarks = app?.internalPlugins.plugins.bookmarks.instance.items;
 
 	return flattenBookmarkGroups(bookmarks);
 };
