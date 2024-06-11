@@ -169,34 +169,26 @@ const getBackground = async (
 			)
 				return cachedBackground;
 			const seasonalTag = getSeasonalTag(new Date());
-			let old = {
-				url: `https://source.unsplash.com/random?${seasonalTag}&cachetag=${new Date()
-					.toDateString()
-					.replace(/ /g, "")}`,
-				date: new Date(),
-			}
-			if (apiKey.length === 0) {
-				return old;
-			}
-			let api = createApi({
+
+			if (apiKey.length === 0) return null;
+
+			const seasonHolidays = await createApi({
 				accessKey: apiKey,
 				fetch: fetchPolyfill,
-			});
-
-			const t = await api.photos.getRandom({
+			}).photos.getRandom({
 				query: seasonalTag,
 				count: 1,
 			}).then((result) => {
 				return result.response;
 			});
-			if (t) {
-				if (t instanceof Array) {
-					return { url: t[0].urls.raw, date: new Date() };
-				}
-				return { url: t.urls.raw, date: new Date() };
-			}
 
-			return old;
+			if (seasonHolidays) {
+				if (seasonHolidays instanceof Array) {
+					return { url: seasonHolidays[0].urls.raw, date: new Date() };
+				}
+				return { url: seasonHolidays.urls.raw, date: new Date() };
+			}
+			return null;
 		case BackgroundTheme.CUSTOM:
 			return { url: customBackground, date: new Date() };
 		case BackgroundTheme.LOCAL:
@@ -212,33 +204,26 @@ const getBackground = async (
 			if (
 				cachedBackground && cachedBackground.url.length > 0 &&
 				isWithinHoursBefore(new Date(cachedBackground.date), 1, new Date())
-			)
-				return cachedBackground;
-			old = {
-				url: `https://source.unsplash.com/random?${backgroundTheme}&cachetag=${new Date()
-					.toDateString()
-					.replace(/ /g, "")}`,
-				date: new Date(),
-			}
-			if (apiKey.length === 0) return old;
+			) return cachedBackground;
 
-			api = createApi({
+			if (apiKey.length === 0) return null;
+
+			const defRandom = await createApi({
 				accessKey: apiKey,
 				fetch: fetchPolyfill,
-			});
-			const random = await api.photos.getRandom({
+			}).photos.getRandom({
 				count: 1,
 				query: backgroundTheme,
 			}).then((result) => {
 				return result.response;
 			});
-			if (random) {
-				if (random instanceof Array) {
-					return { url: random[0].urls.raw, date: new Date() };
+			if (defRandom) {
+				if (defRandom instanceof Array) {
+					return { url: defRandom[0].urls.raw, date: new Date() };
 				}
-				return { url: random.urls.raw, date: new Date() };
+				return { url: defRandom.urls.raw, date: new Date() };
 			}
-			return old;
+			return null;
 	}
 };
 
