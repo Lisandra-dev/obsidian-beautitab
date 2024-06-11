@@ -14,9 +14,12 @@ if you want to view the source, please visit the github repository of this plugi
 
 const prod = process.argv[2] === "production";
 const outdir = prod
-	? "./dist/"
+	? ".\\dist\\"
 	: // Assumed local path. Update this to the path of your local development vault
-	  "E:/Documents/PersonalObsidianVault/.obsidian/plugins/obsidian-canvas-dailynote/";
+	"./";
+
+
+
 
 const context = await esbuild.context({
 	banner: {
@@ -50,10 +53,10 @@ const context = await esbuild.context({
 		sassPlugin(),
 		copyStaticFiles({
 			src: "./manifest.json",
-			dest: path.join(outdir, "manifest.json"),
+			dest: path.join("./", "manifest.json"),
 		}),
 	],
-	outdir: outdir,
+	outdir: "./",
 	define: {
 		"process.env.NODE_ENV": prod ? '"production"' : '"development"',
 		"process.env.PLUGIN_VERSION": `"${packageJson.version}"`,
@@ -68,5 +71,4 @@ if (prod) {
 	process.exit(0);
 } else {
 	await context.watch();
-	await context.serve(); // This enables the "live reload"
 }
