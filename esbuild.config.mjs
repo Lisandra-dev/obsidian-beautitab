@@ -16,6 +16,7 @@ program
 	.option("-v, --vault", "Use vault path")
 	.option("-o, --output-dir <path>", "Output path")
 	.option("-b, --beta", "Beta build")
+	.option("-m, --mobile", "Emulate mobile")
 	.parse();
 
 program.parse();
@@ -129,7 +130,7 @@ const context = await esbuild.context({
 		"process.env.PLUGIN_VERSION": `"${packageJson.version}"`,
 		"process.env.EMULATE_MOBILE": prod
 			? "false"
-			: process.argv.includes("--mobile").toString(),
+			: opt.mobile,
 	},
 	plugins: [
 		sassPlugin(),
