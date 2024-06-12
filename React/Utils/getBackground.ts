@@ -4,6 +4,7 @@ import { isWithinDaysBefore, isWithinHoursBefore } from "./isWithinXDays";
 import { createApi } from 'unsplash-js';
 //@ts-ignore - This is a polyfill for fetch and work using --lib dom
 import { fetch as fetchPolyfill } from 'whatwg-fetch';
+import { CachedBackground } from "../../src/Types/Interfaces";
 
 enum MONTH {
 	JANUARY = 1,
@@ -155,16 +156,13 @@ const getBackground = async (
 	customBackground: string,
 	localBackgrounds: string[],
 	apiKey: string,
-	cachedBackground?: {
-		url: string;
-		date: Date;
-	}
-): Promise<{ url: string, date: Date } | null> => {
-
+	cachedBackground?: CachedBackground
+): Promise<CachedBackground | null> => {
+	
 	switch (backgroundTheme) {
 		case BackgroundTheme.SEASONS_AND_HOLIDAYS:
 			if (
-				cachedBackground && cachedBackground.url.length > 0 &&
+				cachedBackground && cachedBackground.url.length > 0 && cachedBackground.theme === backgroundTheme &&
 				isWithinHoursBefore(new Date(cachedBackground.date), 1, new Date())
 			)
 				return cachedBackground;
@@ -184,9 +182,9 @@ const getBackground = async (
 
 			if (seasonHolidays) {
 				if (seasonHolidays instanceof Array) {
-					return { url: seasonHolidays[0].urls.raw, date: new Date() };
+					return { url: seasonHolidays[0].urls.raw, date: new Date(), theme: backgroundTheme};
 				}
-				return { url: seasonHolidays.urls.raw, date: new Date() };
+				return { url: seasonHolidays.urls.raw, date: new Date(), theme: backgroundTheme};
 			}
 			return null;
 		case BackgroundTheme.CUSTOM:
@@ -203,6 +201,7 @@ const getBackground = async (
 		default:
 			if (
 				cachedBackground && cachedBackground.url.length > 0 &&
+				backgroundTheme === cachedBackground.theme &&
 				isWithinHoursBefore(new Date(cachedBackground.date), 1, new Date())
 			) return cachedBackground;
 
@@ -219,9 +218,9 @@ const getBackground = async (
 			});
 			if (defRandom) {
 				if (defRandom instanceof Array) {
-					return { url: defRandom[0].urls.raw, date: new Date() };
+					return { url: defRandom[0].urls.raw, date: new Date(), theme: backgroundTheme };
 				}
-				return { url: defRandom.urls.raw, date: new Date() };
+				return { url: defRandom.urls.raw, date: new Date(), theme: backgroundTheme};
 			}
 			return null;
 	}

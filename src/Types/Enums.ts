@@ -14,6 +14,8 @@ export enum BackgroundTheme {
 	TRANSPARENT_WITH_SHADOWS = "transparent with shadows",
 }
 
+
+
 export enum TIME_FORMAT {
 	TWELVE_HOUR = "12-hour",
 	TWENTY_FOUR_HOUR = "24-hour",
