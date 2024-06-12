@@ -10,13 +10,13 @@ import {
 /**
  * This allows a "live-reload" of Obsidian when developing the plugin.
  * Any changes to the code will force reload Obsidian.
- */
 if (process.env.NODE_ENV === "development") {
 	new EventSource("http://127.0.0.1:8000/esbuild").addEventListener(
 		"change",
 		() => location.reload()
 	);
 }
+*/
 
 export default class BeautitabPlugin extends Plugin {
 	settings: BeautitabPluginSettings;
