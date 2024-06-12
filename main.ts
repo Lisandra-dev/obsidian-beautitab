@@ -1,4 +1,4 @@
-import { Notice, Plugin, requestUrl } from "obsidian";
+import { Notice, Platform, Plugin } from "obsidian";
 import { ReactView, BEAUTITAB_REACT_VIEW } from "./Views/ReactView";
 import Observable from "src/Utils/Observable";
 import {
@@ -7,16 +7,6 @@ import {
 	DEFAULT_SETTINGS,
 } from "src/Settings/Settings";
 
-/**
- * This allows a "live-reload" of Obsidian when developing the plugin.
- * Any changes to the code will force reload Obsidian.
-if (process.env.NODE_ENV === "development") {
-	new EventSource("http://127.0.0.1:8000/esbuild").addEventListener(
-		"change",
-		() => location.reload()
-	);
-}
-*/
 
 export default class BeautitabPlugin extends Plugin {
 	settings: BeautitabPluginSettings;
@@ -24,8 +14,6 @@ export default class BeautitabPlugin extends Plugin {
 
 	async onload() {
 		await this.loadSettings();
-
-		this.versionCheck();
 
 		this.settingsObservable = new Observable(this.settings);
 
@@ -45,21 +33,19 @@ export default class BeautitabPlugin extends Plugin {
 		);
 
 		if (process.env.NODE_ENV === "development") {
-			// @ts-ignore
-			if (process.env.EMULATE_MOBILE && !this.app.isMobile) {
-				// @ts-ignore
+			if (process.env.EMULATE_MOBILE && !Platform.isMobile) {
 				this.app.emulateMobile(true);
 			}
 
-			// @ts-ignore
-			if (!process.env.EMULATE_MOBILE && this.app.isMobile) {
-				// @ts-ignore
+			if (!process.env.EMULATE_MOBILE && Platform.isMobile) {
 				this.app.emulateMobile(false);
 			}
 		}
 	}
 
-	onunload() {}
+	onunload() {
+		console.log("unloading Beautitab");
+	}
 
 	/**
 	 * Load data from disk, stored in data.json in plugin folder
@@ -76,42 +62,7 @@ export default class BeautitabPlugin extends Plugin {
 		await this.saveData(this.settings);
 	}
 
-	/**
-	 * Check the local plugin version against github. If there is a new version, notify the user.
-	 */
-	async versionCheck() {
-		const localVersion = process.env.PLUGIN_VERSION;
-		const stableVersion = await requestUrl(
-			"https://raw.githubusercontent.com/andrewmcgivery/obsidian-beautitab/main/package.json"
-		).then(async (res) => {
-			if (res.status === 200) {
-				const response = await res.json;
-				return response.version;
-			}
-		});
-		const betaVersion = await requestUrl(
-			"https://raw.githubusercontent.com/andrewmcgivery/obsidian-beautitab/beta/package.json"
-		).then(async (res) => {
-			if (res.status === 200) {
-				const response = await res.json;
-				return response.version;
-			}
-		});
-
-		if (localVersion?.indexOf("beta") !== -1) {
-			if (localVersion !== betaVersion) {
-				new Notice(
-					"There is a beta update available for the Beautitab plugin. Please update to to the latest version to get the latest features!",
-					0
-				);
-			}
-		} else if (localVersion !== stableVersion) {
-			new Notice(
-				"There is an update available for the Beautitab plugin. Please update to to the latest version to get the latest features!",
-				0
-			);
-		}
-	}
+	
 
 	/**
 	 * Hijack new tabs and show Beauitab
@@ -132,13 +83,10 @@ export default class BeautitabPlugin extends Plugin {
 	 */
 	openSwitcherCommand(command: string): void {
 		const pluginID = command.split(":")[0];
-		//@ts-ignore
-		const plugins = this.app.plugins.plugins;
-		//@ts-ignore
-		const internalPlugins = this.app.internalPlugins.plugins;
+		const plugins = this.app.plugins.enabledPlugins.has(pluginID);
+		const internalPlugins = this.app.internalPlugins.getEnabledPlugins().find((plugin) => plugin.manifest.id === pluginID);
 
-		if (plugins[pluginID] || internalPlugins[pluginID]?.enabled) {
-			//@ts-ignore
+		if (plugins || internalPlugins) {
 			this.app.commands.executeCommandById(command);
 		} else {
 			new Notice(

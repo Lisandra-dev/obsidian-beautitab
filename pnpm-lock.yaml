@@ -33,9 +33,15 @@ importers:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
     devDependencies:
+      '@types/electron':
+        specifier: npm:@ophidian/electron-types@^24.3.1
+        version: '@ophidian/electron-types@24.3.1'
       '@types/node':
         specifier: ^16.11.6
         version: 16.18.71
+      '@types/obsidian-typings':
+        specifier: npm:obsidian-typings@^1.1.6
+        version: obsidian-typings@1.1.6(@ophidian/electron-types@24.3.1)(@types/node@16.18.71)(obsidian@1.4.11(@codemirror/state@6.4.0)(@codemirror/view@6.23.0))
       '@types/react':
         specifier: ^18.2.42
         version: 18.2.48
@@ -273,6 +279,9 @@ packages:
   '@nodelib/fs.walk@1.2.8':
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
+
+  '@ophidian/electron-types@24.3.1':
+    resolution: {integrity: sha512-fzvB7sQMxTbQHbp3rcYIxaqHiWjFnpSBVvZBSDH0Rq0xMvihBH1D4/O2JqybSlVpYtbvXR4nVKeH3w4JmHLTag==}
 
   '@sindresorhus/is@4.6.0':
     resolution: {integrity: sha512-t09vSN3MdfsyCHoFcTRCH/iUtG7OJ0CsjzB8cjAmKc/va/kIgeDI/TxsigdncE/4be734m0cvIYwNaV4i2XqAw==}
@@ -905,6 +914,13 @@ packages:
     resolution: {integrity: sha512-NuAESUOUMrlIXOfHKzD6bpPu3tYt3xvjNdRIQ+FeT0lNb4K8WR70CaDxhuNguS2XG+GjkyMwOzsN5ZktImfhLA==}
     engines: {node: '>= 0.4'}
 
+  obsidian-typings@1.1.6:
+    resolution: {integrity: sha512-p3iWfvHDJfrwdYKAhb8adlBVOGtGteEy5nE7Jzhb8K5nyrTb5DvOtG+BQGneVM7Ou6UMkZnRoOLPkhJMXLquGw==}
+    peerDependencies:
+      '@types/electron': npm:@ophidian/electron-types
+      '@types/node': ^20.10.7
+      obsidian: ^1.5.7-1
+
   obsidian@1.4.11:
     resolution: {integrity: sha512-BCVYTvaXxElJMl6MMbDdY/CGK+aq18SdtDY/7vH8v6BxCBQ6KF4kKxL0vG9UZ0o5qh139KpUoJHNm+6O5dllKA==}
     peerDependencies:
@@ -1317,6 +1333,8 @@ snapshots:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.16.0
+
+  '@ophidian/electron-types@24.3.1': {}
 
   '@sindresorhus/is@4.6.0': {}
 
@@ -2037,6 +2055,12 @@ snapshots:
 
   object-keys@1.1.1:
     optional: true
+
+  obsidian-typings@1.1.6(@ophidian/electron-types@24.3.1)(@types/node@16.18.71)(obsidian@1.4.11(@codemirror/state@6.4.0)(@codemirror/view@6.23.0)):
+    dependencies:
+      '@types/electron': '@ophidian/electron-types@24.3.1'
+      '@types/node': 16.18.71
+      obsidian: 1.4.11(@codemirror/state@6.4.0)(@codemirror/view@6.23.0)
 
   obsidian@1.4.11(@codemirror/state@6.4.0)(@codemirror/view@6.23.0):
     dependencies:
