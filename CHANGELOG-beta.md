@@ -1,3 +1,8 @@
+## [1.6.2-6](https://github.com/Lisandra-dev/obsidian-beautitab/compare/1.6.2-5...1.6.2-6) (2024-06-12)
+### Bug Fixes
+
+* always change the image when the hour change! ([0169173](https://github.com/Lisandra-dev/obsidian-beautitab/commit/01691732877a85f72e9b458dc09bfe94c641933d))
+
 ## [1.6.2-5](https://github.com/Lisandra-dev/obsidian-beautitab/compare/1.6.2-0...1.6.2-5) (2024-06-12)
 
 ## [1.6.2-0](https://github.com/Lisandra-dev/obsidian-beautitab/compare/1.6.2-3...1.6.2-0) (2024-06-12)
