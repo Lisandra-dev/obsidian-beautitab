@@ -1,3 +1,5 @@
+## [1.6.2-5](https://github.com/Lisandra-dev/obsidian-beautitab/compare/1.6.2-0...1.6.2-5) (2024-06-12)
+
 ## [1.6.2-0](https://github.com/Lisandra-dev/obsidian-beautitab/compare/1.6.2-3...1.6.2-0) (2024-06-12)
 ### Bug Fixes
 
