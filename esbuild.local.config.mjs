@@ -13,13 +13,6 @@ if you want to view the source, please visit the github repository of this plugi
 `;
 
 const prod = process.argv[2] === "production";
-const outdir = prod
-	? ".\\dist\\"
-	: // Assumed local path. Update this to the path of your local development vault
-	"./";
-
-
-
 
 const context = await esbuild.context({
 	banner: {
