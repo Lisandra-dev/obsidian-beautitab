@@ -1,3 +1,8 @@
+## [1.6.2-7](https://github.com/Lisandra-dev/obsidian-beautitab/compare/1.6.2-6...1.6.2-7) (2024-06-15)
+### Bug Fixes
+
+* don't need to bind i18next, i18next.t works outof thebox! ([7df7915](https://github.com/Lisandra-dev/obsidian-beautitab/commit/7df79154f33a4b3f3835f69cd037fb623a72266c))
+
 ## [1.6.2-6](https://github.com/Lisandra-dev/obsidian-beautitab/compare/1.6.2-5...1.6.2-6) (2024-06-12)
 ### Bug Fixes
 
