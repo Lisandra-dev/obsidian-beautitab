@@ -67,7 +67,7 @@ const exportToVaultFunc = {
 
 			fs.copyFileSync(`${outdir}/main.js`, path.join(folderPlugin, "main.js"));
 			if (fs.existsSync(`${outdir}/styles.css`))
-				fs.copyFileSync("./styles.css", path.join(folderPlugin, "styles.css"));
+				fs.copyFileSync(`${outdir}/styles.css`, path.join(folderPlugin, "styles.css"));
 			if (opt.beta && fs.existsSync(`${outdir}/manifest-beta.json`))
 				fs.copyFileSync("./manifest-beta.json", path.join(folderPlugin, "manifest.json"));
 			else if (!opt.beta) fs.copyFileSync("./manifest.json", path.join(folderPlugin, "manifest.json"));
@@ -130,7 +130,7 @@ const context = await esbuild.context({
 		"process.env.PLUGIN_VERSION": `"${packageJson.version}"`,
 		"process.env.EMULATE_MOBILE": prod
 			? "false"
-			: opt.mobile,
+			: `${!!opt.mobile}`,
 	},
 	plugins: [
 		sassPlugin(),
