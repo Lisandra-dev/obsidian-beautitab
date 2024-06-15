@@ -6,7 +6,6 @@ import Observable from "src/Utils/Observable";
 import BeautitabPlugin from "main";
 
 export const BEAUTITAB_REACT_VIEW = "beautitab-react-view";
-const Translate = i18next.t.bind(i18next);
 
 export class ReactView extends FileView {
 	root: Root | null = null;
@@ -32,7 +31,7 @@ export class ReactView extends FileView {
 	}
 
 	getDisplayText() {
-		return Translate("interface.label-new-tab");
+		return i18next.t("interface.label-new-tab");
 	}
 
 	getIcon() {
