@@ -26,3 +26,4 @@ dist/
 dist.zip
 styles.css
 !src/styles.css
+_test.mjs
