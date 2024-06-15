@@ -1,3 +1,11 @@
+## [1.6.2-7](https://github.com/Lisandra-dev/obsidian-beautitab/compare/1.6.2-5...1.6.2-7) (2024-06-15)
+### Bug Fixes
+
+* always change the image when the hour change! ([0169173](https://github.com/Lisandra-dev/obsidian-beautitab/commit/01691732877a85f72e9b458dc09bfe94c641933d))
+* css not send ([2a95d58](https://github.com/Lisandra-dev/obsidian-beautitab/commit/2a95d583e7d984d994fcea84323a8b0d4c694cd3))
+* css not send ([14693d7](https://github.com/Lisandra-dev/obsidian-beautitab/commit/14693d7def1c1664b7aac0c400bb49e57f99d3b2))
+* don't need to bind i18next, i18next.t works outof thebox! ([7df7915](https://github.com/Lisandra-dev/obsidian-beautitab/commit/7df79154f33a4b3f3835f69cd037fb623a72266c))
+
 ## [1.6.2-7](https://github.com/Lisandra-dev/obsidian-beautitab/compare/1.6.2-6...1.6.2-7) (2024-06-15)
 ### Bug Fixes
 
